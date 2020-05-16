@@ -33,5 +33,5 @@ app.post("/cadastrar", usersController.signUp);
 
 app.get('/login', usersController.login);
 
-server.listen(8000, () => {
+server.listen(process.env.PORT || 8000, () => {
 });
