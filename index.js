@@ -46,7 +46,7 @@ app.get('/login', usersController.login);
 //app.use('/action', authRequestMiddleware)
 app.post('/action', (req, res) => {
     console.log('here');
-    io.sockets.emit('new-action', req.body);
+    io.sockets.emit('new-action', JSON.stringify(req.body));
 
     res.status = 200
     res.send('ok')
