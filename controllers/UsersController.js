@@ -7,7 +7,6 @@ const securityUtil = require('../Utils/Security/SecurityUtil');
 const responseUtil = require('../Utils/ResponseUtil');
 const jwt = require('jsonwebtoken');
 
-firebase.initializeApp();
 
 const db = firebase.admin.firestore().collection("Usuario");
 
@@ -57,7 +56,6 @@ const login = async (req, res) => {
             responseUtil.createSuccesResponse(res, 200,user);
         }
     }).catch(err => {
-        console.log(err);
         responseUtil.createErrorResponse(res, 400, errorMessage.NaoIdentificado);
     })    
 }
@@ -84,7 +82,26 @@ const getById = async (id) => {
     catch ( error ){
        throw error;
     }
+
+}
+
+const handleNotification = (token) => {
+    const message = {
+        data: {
+          score: '850',
+          time: '2:45'
+        },
+      };
+  
+    firebase.admin.messaging().sendToDevice(token,message)
+        .then((response) => {
+        // Response is a message ID string.
+            console.log('Successfully sent message:', response);
+        })
+        .catch((error) => {
+            console.log('Error sending message:', error);
+        });
 }
 
 
-module.exports = { getUsers, signUp, login, getById }
+module.exports = { getUsers, signUp, login, getById, handleNotification }
