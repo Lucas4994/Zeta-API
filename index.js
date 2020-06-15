@@ -44,9 +44,11 @@ app.post('/action', (req, res) => {
     io.sockets.emit('new-action', JSON.stringify(req.body));
     res.status = 200;
     return res.send();
-})
+});
 
-app.post('/changeconfig',()=>{})
+app.post('/changeconfig',(req, res)=>{
+    io.sockets.emit("new-cfg", JSON.stringify(req.body));
+});
 
 app.post('/apptoken', (req, res) => {
     process.env.CONNECTED_DEVICE_TOKEN = req.body.token;
