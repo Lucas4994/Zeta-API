@@ -1,43 +1,25 @@
-
-const errorMessage = require('../models/Error');
 const firebase = require("../firebase/firebase");
 
+const handleNotification = (message) => {
 
-const securityUtil = require('../Utils/Security/SecurityUtil');
-const responseUtil = require('../Utils/ResponseUtil');
-const Notification = require('../models/Notification');
+  const notification = {
+      notification: {
+          title: message.title,
+          body: message.body,
+      },
+      token: process.env.CONNECTED_DEVICE_TOKEN
+  }
 
-
-const handleNotitification = (alert) => {
-
-    let message;
-
-    switch(alert.type){
-
-        case 'security':
-            message = Notification.securityNotification;
-        break;
-    }
-
-    // const message = {
-    //     data: {
-    //       score: '850',
-    //       time: '2:45'
-    //     },
-    //     token: process.env.registrationToken
-    //   };
-
-    firebase.admin.messaging().send(message)
-        .then((response) => {
-        // Response is a message ID string.
-            console.log('Successfully sent message:', response);
-        })
-        .catch((error) => {
-            console.log('Error sending message:', error);
-        });
-
+  firebase.admin.messaging().send(notification)
+      .then((response) => {
+          return true;
+          
+      })
+      .catch((error) => {
+         return false;
+      });
 }
 
 
-module.exports = { handleNotitification }
+module.exports = { handleNotification }
 

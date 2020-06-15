@@ -5,11 +5,11 @@ const socketevents = socket => {
       });
 
     socket.on('new-action', (action) => {
-        console.log(action)
+       //
       });
 
-    socket.on('security-alert', (alert) => {
-        notificationController.handleNotitification(alert);
+    socket.on('alert', (message) => {
+        notificationController.handleNotification(message);
     });
 
     socket.on('login', (appNotificationToken) => {

@@ -1,5 +1,6 @@
 const express = require('express');
 const env = require('dotenv/config');
+fs = require('fs');
 const app = express();
 const server = require ('http').createServer(app);
 const bodyParser = require('body-parser');
@@ -13,6 +14,7 @@ const actionController = require('./controllers/ActionController');
 const notificationController = require('./controllers/NotificationController');
 const authRequestMiddleware = require('./middlewares/AuthRequestMiddleware');
 const socketControler = require('./controllers/SocketController');
+const { createSuccesResponse } = require('./Utils/ResponseUtil');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
@@ -23,7 +25,7 @@ app.get('/', (req, res) => {
     res.json('Seja bem vindo zeta!');
 });
 
-//app.use('/usuarios', authRequestMiddleware)
+app.use('/usuarios', authRequestMiddleware)
 app.get('/usuarios', usersController.getUsers);
 
 app.use('/cadastrar', authRequestMiddleware)
@@ -37,8 +39,6 @@ app.get('/comodos', houseController.getComodos);
 app.use('/sensores', authRequestMiddleware);
 app.get('/sensores', houseController.getSensores)
 
-
-// rotas do rasp
 //app.use('/action', authRequestMiddleware)
 app.post('/action', (req, res) => {
     io.sockets.emit('new-action', JSON.stringify(req.body));
@@ -49,22 +49,8 @@ app.post('/action', (req, res) => {
 app.post('/changeconfig',()=>{})
 
 app.post('/apptoken', (req, res) => {
-    usersController.handleNotification(req.body.token);
-    io.sockets.emit('login', JSON.stringify(req.body));
-    return res.send("ok");
-});
-
-app.post('/teste', async (req, res)=> {
-    let testes = [];
-    req.body.map(sensor => {
-
-         firebase.admin.firestore().collection('Sensor').add({
-            SensorID: sensor['TipoID'],
-            Descicao: sensor['Descricao'],
-            ComodoID: sensor['Excluido']
-        });
-    });
-    return res.json();
+    process.env.CONNECTED_DEVICE_TOKEN = req.body.token;
+    createSuccesResponse(res, 200, {});
 });
 
 server.listen(process.env.PORT || 3000, () => {

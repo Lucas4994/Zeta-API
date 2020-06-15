@@ -85,23 +85,5 @@ const getById = async (id) => {
 
 }
 
-const handleNotification = (token) => {
-    const message = {
-        data: {
-          score: '850',
-          time: '2:45'
-        },
-      };
-  
-    firebase.admin.messaging().sendToDevice(token,message)
-        .then((response) => {
-        // Response is a message ID string.
-            console.log('Successfully sent message:', response);
-        })
-        .catch((error) => {
-            console.log('Error sending message:', error);
-        });
-}
 
-
-module.exports = { getUsers, signUp, login, getById, handleNotification }
+module.exports = { getUsers, signUp, login, getById }
