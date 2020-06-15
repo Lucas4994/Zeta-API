@@ -11,7 +11,6 @@ firebase.initializeApp();
 const usersController = require('./controllers/UsersController');
 const houseController = require('./controllers/HouseController');
 const actionController = require('./controllers/ActionController');
-const notificationController = require('./controllers/NotificationController');
 const authRequestMiddleware = require('./middlewares/AuthRequestMiddleware');
 const socketControler = require('./controllers/SocketController');
 const { createSuccesResponse } = require('./Utils/ResponseUtil');

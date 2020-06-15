@@ -1,3 +1,5 @@
+const notificationController = require('./NotificationController');
+
 const socketevents = socket => {
     socketClient = socket
     socket.on('new-message', (message) => {

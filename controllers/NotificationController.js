@@ -10,6 +10,8 @@ const handleNotification = (message) => {
       token: process.env.CONNECTED_DEVICE_TOKEN
   }
 
+  console.log(notification);
+
   firebase.admin.messaging().send(notification)
       .then((response) => {
           return true;
