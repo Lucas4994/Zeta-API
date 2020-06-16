@@ -3,11 +3,11 @@ const { createSuccesResponse } = require("../Utils/ResponseUtil");
 
 const db = firebase.admin.firestore().collection("Temperatura");
 
-const addCurrentTemperature = (req, res) => {
+const addCurrentTemperature = (temperatura) => {
     
     const temp = {
-        Temperatura: req.body.temp,
-        Data: req.body.data
+        Temperatura: temperatura.temp,
+        Data: temperatura.data
     }
 
     db.add(temp)
