@@ -11,8 +11,8 @@ const addCurrentTemperature = (temperatura) => {
     }
 
     db.add(temp)
-    .then(createSuccesResponse(res, 200, temp))
-    .catch(ex => responseUtil.createErrorResponse(res, 400, {}));
+    .then()
+    .catch(ex => {});
 }
 
 module.exports = { addCurrentTemperature }
