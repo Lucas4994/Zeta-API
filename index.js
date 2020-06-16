@@ -14,6 +14,7 @@ const actionController = require('./controllers/ActionController');
 const authRequestMiddleware = require('./middlewares/AuthRequestMiddleware');
 const socketControler = require('./controllers/SocketController');
 const { createSuccesResponse } = require('./Utils/ResponseUtil');
+const tempController = require('./controllers/TempController');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));

@@ -1,7 +1,13 @@
 const notificationController = require('./NotificationController');
+const tempController = require('./TempController');
 
 const socketevents = socket => {
-    socketClient = socket
+    socketClient = socket;
+
+    socket.on('current-temperature',(temperatura) => {
+      tempController.addCurrentTemperature(temp);
+    });
+
     socket.on('new-message', (message) => {
         socket.broadcast.emit('new-message', message);
       });
