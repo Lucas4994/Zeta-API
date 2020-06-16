@@ -6,6 +6,7 @@ const firebase = require("../firebase/firebase");
 const securityUtil = require('../Utils/Security/SecurityUtil');
 const responseUtil = require('../Utils/ResponseUtil');
 const jwt = require('jsonwebtoken');
+const { user } = require('firebase-functions/lib/providers/auth');
 
 
 const db = firebase.admin.firestore().collection("Usuario");
@@ -26,13 +27,21 @@ const getUsers = async (req, res) => {
 
 const signUp = (req, res) => {
     const newUser = User.createUser(req.body)
-    db.add(newUser)
+    firebaseUserModel = {
+       Admin: newUser.Admin,
+       Email: newUser.Email,
+       Senha: newUser.Senha,
+       DataUltimoAcesso: newUser.DataUltimoAcesso,
+       GrupoId: newUser.GrupoId,
+       Nome: newUser.Nome,
+    }
+    db.add(firebaseUserModel)
     .then( doc => {
-        newUser.setId(doc.id)
+        newUser.setId(doc.id);
         responseUtil.createSuccesResponse(res, 200, newUser);
     })
     .catch((ex) => {
-        responseUtil.createErrorResponse(res, 400, newUser);
+        responseUtil.createErrorResponse(res, 400, {});
     }); 
 }
 
