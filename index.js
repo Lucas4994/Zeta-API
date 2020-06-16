@@ -48,6 +48,7 @@ app.post('/action', (req, res) => {
 
 app.post('/changeconfig',(req, res)=>{
     io.sockets.emit("new-cfg", JSON.stringify(req.body));
+    createSuccesResponse(res, 200, {});
 });
 
 app.post('/apptoken', (req, res) => {
