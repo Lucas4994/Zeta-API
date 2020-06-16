@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
 app.use('/usuarios', authRequestMiddleware)
 app.get('/usuarios', usersController.getUsers);
 
-app.use('/cadastrar', authRequestMiddleware)
+//app.use('/cadastrar', authRequestMiddleware)
 app.post("/cadastrar", usersController.signUp);
 
 app.get('/login', usersController.login);
