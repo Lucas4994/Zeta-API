@@ -5,7 +5,7 @@ const socketevents = socket => {
     socketClient = socket;
 
     socket.on('current-temperature',(temperatura) => {
-      tempController.addCurrentTemperature(temp);
+      tempController.addCurrentTemperature(temperatura);
     });
 
     socket.on('new-message', (message) => {
