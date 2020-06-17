@@ -13,7 +13,7 @@ const houseController = require('./controllers/HouseController');
 const actionController = require('./controllers/ActionController');
 const authRequestMiddleware = require('./middlewares/AuthRequestMiddleware');
 const socketControler = require('./controllers/SocketController');
-const { createSuccesResponse } = require('./Utils/ResponseUtil');
+const { createSuccesResponse, createErrorResponse } = require('./Utils/ResponseUtil');
 const tempController = require('./controllers/TempController');
 
 app.use(bodyParser.json());
@@ -41,14 +41,30 @@ app.get('/sensores', houseController.getSensores)
 
 //app.use('/action', authRequestMiddleware)
 app.post('/action', (req, res) => {
+    console.log( JSON.stringify(req.body))
     io.sockets.emit('new-action', JSON.stringify(req.body));
     res.status = 200;
     return res.send();
 });
 
 app.post('/changeconfig',(req, res)=>{
-    io.sockets.emit("new-cfg", JSON.stringify(req.body));
-    createSuccesResponse(res, 200, {});
+    const db = firebase.admin.firestore().collection("Config");
+    db.add({
+        sensorChuva: req.body.sensorChuva,
+        sensorGas: req.body.sensorGas,
+        climatizacao: {
+            temp: req.body.climatizacao.temp,
+            ativo: req.body.climatizacao.ativo
+        },
+        ldr: req.body.ldr 
+    })
+    .then((doc) => {
+        io.sockets.emit("new-cfg", JSON.stringify(req.body));
+        createSuccesResponse(res, 200, {id: doc.id});
+    })
+    .catch(ex => createErrorResponse(res, 500, ex));
+   
+    
 });
 
 app.post('/apptoken', (req, res) => {

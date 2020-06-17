@@ -7,7 +7,8 @@ const addCurrentTemperature = (temperatura) => {
     
     const temp = {
         Temperatura: temperatura.temp,
-        Data: temperatura.data
+        Data: temperatura.data,
+        Umid: temperatura.umid,
     }
 
     db.add(temp)
