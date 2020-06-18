@@ -41,7 +41,6 @@ app.get('/sensores', houseController.getSensores)
 
 //app.use('/action', authRequestMiddleware)
 app.post('/action', (req, res) => {
-    console.log( JSON.stringify(req.body))
     io.sockets.emit('new-action', JSON.stringify(req.body));
     res.status = 200;
     return res.send();
@@ -52,10 +51,8 @@ app.post('/changeconfig',(req, res)=>{
     db.add({
         sensorChuva: req.body.sensorChuva,
         sensorGas: req.body.sensorGas,
-        climatizacao: {
-            temp: req.body.climatizacao.temp,
-            ativo: req.body.climatizacao.ativo
-        },
+        temp: req.body.temp,
+        ativo: req.body.ativo,
         ldr: req.body.ldr 
     })
     .then((doc) => {
