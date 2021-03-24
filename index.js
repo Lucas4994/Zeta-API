@@ -38,7 +38,7 @@ app.get('/comodos', houseController.getComodos);
 app.use('/sensores', authRequestMiddleware);
 app.get('/sensores', houseController.getSensores)
 
-app.get('/securityVideoCam', securityVideoCamController.getSecurityCamVideo);
+app.post('/securityVideoCam', securityVideoCamController.getSecurityCamVideo);
 
 //app.use('/action', authRequestMiddleware)
 app.post('/action', (req, res) => {
