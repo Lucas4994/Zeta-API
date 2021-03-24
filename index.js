@@ -15,10 +15,9 @@ const authRequestMiddleware = require('./middlewares/AuthRequestMiddleware');
 const socketControler = require('./controllers/SocketController');
 const { createSuccesResponse, createErrorResponse } = require('./Utils/ResponseUtil');
 const tempController = require('./controllers/TempController');
+const securityVideoCamController = require('./controllers/Security/SecuityCamController/SecurityCamController')
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:true}));
-
+app.use(express.json());
 io.on('connection', socketControler.socketevents);
 
 app.get('/', (req, res) => {
@@ -38,6 +37,8 @@ app.get('/comodos', houseController.getComodos);
 
 app.use('/sensores', authRequestMiddleware);
 app.get('/sensores', houseController.getSensores)
+
+app.get('/securityVideoCam', securityVideoCamController.getSecurityCamVideo);
 
 //app.use('/action', authRequestMiddleware)
 app.post('/action', (req, res) => {
