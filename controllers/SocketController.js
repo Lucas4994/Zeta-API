@@ -24,6 +24,10 @@ const socketevents = socket => {
         socket.broadcast.emit('new-token', appNotificationToken);
     });
 
+    socket.on('video-frame', (message) => {
+      socket.broadcast.emit(message);
+    })
+
 }
 
 module.exports = {socketevents};
