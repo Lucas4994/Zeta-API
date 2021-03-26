@@ -6,6 +6,7 @@ const server = require ('http').createServer(app);
 const bodyParser = require('body-parser');
 const io = require('socket.io')(server);
 const firebase = require("./firebase/firebase");
+var cors = require('cors')
 firebase.initializeApp();
 
 const usersController = require('./controllers/UsersController');
@@ -18,6 +19,7 @@ const tempController = require('./controllers/TempController');
 const securityVideoCamController = require('./controllers/Security/SecuityCamController/SecurityCamController')
 
 app.use(express.json());
+app.use(cors())
 io.on('connection', socketControler.socketevents);
 
 app.get('/', (req, res) => {
