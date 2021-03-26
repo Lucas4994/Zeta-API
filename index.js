@@ -19,7 +19,6 @@ const tempController = require('./controllers/TempController');
 const securityVideoCamController = require('./controllers/Security/SecuityCamController/SecurityCamController')
 
 app.use(express.json());
-app.use(cors())
 io.on('connection', socketControler.socketevents);
 
 app.get('/', (req, res) => {
