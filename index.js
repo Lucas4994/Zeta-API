@@ -48,6 +48,12 @@ app.post('/action', (req, res) => {
     return res.send();
 });
 
+app.post('/teste', (req, res)=>{
+    io.sockets.emit('teste', {'teste': 'TESTE TESTE TESTE TESTE TESTE'});
+    res.status = 200;
+    return res.send();
+})
+
 app.post('/changeconfig',(req, res)=>{
     const db = firebase.admin.firestore().collection("Config");
     db.add({
