@@ -43,6 +43,10 @@ app.post('/securityVideoCam', securityVideoCamController.getSecurityCamVideo);
 
 //app.use('/action', authRequestMiddleware)
 app.post('/action', (req, res) => {
+    const db = firebase.admin.firestore().collection("Logs");
+    db.add({solicitacao: req.body})
+    .then()
+    .catch(ex => {});
     io.sockets.emit('new-action', JSON.stringify(req.body));
     res.status = 200;
     return res.send();
