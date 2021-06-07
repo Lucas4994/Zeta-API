@@ -18,6 +18,7 @@ const getComodos = async (req, res) => {
         docs.forEach( doc => {
             comodos.push({
                 descricao: doc.data().Descricao, 
+                comodoId: doc.data().ComodoID,
                 excluido: doc.data().Excluido,
                 grupoUsuarioID: doc.data().GrupoUsuarioID,
                 automatico: doc.data().Automatico
