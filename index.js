@@ -39,8 +39,6 @@ app.get('/comodos', houseController.getComodos);
 app.use('/sensores', authRequestMiddleware);
 app.get('/sensores', houseController.getSensores)
 
-app.post('/securityVideoCam', securityVideoCamController.getSecurityCamVideo);
-
 //app.use('/action', authRequestMiddleware)
 app.post('/action', (req, res) => {
     const db = firebase.admin.firestore().collection("Logs");
