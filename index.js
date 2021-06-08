@@ -21,7 +21,7 @@ const securityVideoCamController = require('./controllers/Security/SecuityCamCon
 app.use(express.json());
 io.on('connection', socketControler.socketevents);
 
-app.get('/', (req, res) => {
+app.get('/apiStatus', (req, res) => {
     createSuccesResponse(res, 200, {});
 })
 
