@@ -64,7 +64,6 @@ app.post('/changeconfig',(req, res)=>{
         ldr: req.body.ldr 
     })
     .then((doc) => {
-        io.sockets.emit("new-cfg", JSON.stringify(req.body));
         createSuccesResponse(res, 200, {id: doc.id});
     })
     .catch(ex => createErrorResponse(res, 500, ex));
