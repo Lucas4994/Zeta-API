@@ -78,7 +78,7 @@ app.post('/apptoken', (req, res) => {
 });
 
 app.post('/alert', (req, res) => {
-    notificationController.handleNotification(req.body);
+    notificationController.handleNotification(JSON.parse(req.body));
 });
 
 server.listen(process.env.PORT || 3000, () => {
