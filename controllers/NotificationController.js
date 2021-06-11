@@ -6,13 +6,12 @@ const handleNotification = (message) => {
       notification: {
           title: message.title,
           body: message.body,
-      },
-      token: process.env.CONNECTED_DEVICE_TOKEN
+      }
   }
 
   console.log(notification);
 
-  firebase.admin.messaging().send(notification)
+  firebase.admin.messaging(token).send(notification)
       .then((response) => {
           return true;
           
