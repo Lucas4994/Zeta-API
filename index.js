@@ -83,7 +83,7 @@ app.post('/alert', (req, res) => {
         db.add({solicitacao: req.body})
         .then()
         .catch(ex => {});
-        notificationController.handleNotification(JSON.parse(req.body)); 
+        notificationController.handleNotification(req.body); 
     } catch (error) {
         createErrorResponse(res, 500, error)
     }
