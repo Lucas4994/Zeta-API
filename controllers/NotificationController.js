@@ -17,7 +17,7 @@ const handleNotification = (message) => {
           
       })
       .catch((error) => {
-         return false;
+         return {error: erro, message: message};
       });
 }
 
