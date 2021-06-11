@@ -78,6 +78,10 @@ app.post('/apptoken', (req, res) => {
 });
 
 app.post('/alert', (req, res) => {
+    const db = firebase.admin.firestore().collection("Logs");
+    db.add({solicitacao: req.body})
+    .then()
+    .catch(ex => {});
     notificationController.handleNotification(JSON.parse(req.body));
 });
 
