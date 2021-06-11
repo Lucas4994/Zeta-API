@@ -78,11 +78,19 @@ app.post('/apptoken', (req, res) => {
 });
 
 app.post('/alert', (req, res) => {
-    const db = firebase.admin.firestore().collection("Logs");
-    db.add({solicitacao: req.body})
-    .then()
-    .catch(ex => {});
-    notificationController.handleNotification(JSON.parse(req.body));
+    try {
+        const db = firebase.admin.firestore().collection("Logs");
+        db.add({solicitacao: req.body})
+        .then()
+        .catch(ex => {});
+        notificationController.handleNotification(JSON.parse(req.body)); 
+    } catch (error) {
+        createErrorResponse(res, 500, error)
+    }
+    
+
+    createSuccesResponse(res, 200, {});
+    
 });
 
 server.listen(process.env.PORT || 3000, () => {
