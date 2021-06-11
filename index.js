@@ -17,7 +17,7 @@ const socketControler = require('./controllers/SocketController');
 const { createSuccesResponse, createErrorResponse } = require('./Utils/ResponseUtil');
 const tempController = require('./controllers/TempController');
 const securityVideoCamController = require('./controllers/Security/SecuityCamController/SecurityCamController')
-const notificationController = require('./NotificationController');
+const notificationController = require('./controllers/NotificationController');
 
 app.use(express.json());
 io.on('connection', socketControler.socketevents);
