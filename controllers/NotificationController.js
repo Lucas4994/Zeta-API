@@ -6,13 +6,12 @@ const handleNotification = (message) => {
       notification: {
           title: message.title,
           body: message.body,
-          token: message.token
       }
   }
 
   console.log(notification);
 
-  firebase.admin.messaging(firebase.admin.app("com.example.zetaapp")).send(notification)
+  firebase.admin.messaging().sendToDevice(message.token, notification)
       .then((response) => {
           return true;
           
