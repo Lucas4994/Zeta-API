@@ -12,7 +12,7 @@ const handleNotification = (message) => {
 
   console.log(notification);
 
-  firebase.admin.messaging(token).send(notification)
+  firebase.admin.messaging(firebase.admin.app("zetaapp")).send(notification)
       .then((response) => {
           return true;
           
