@@ -6,6 +6,7 @@ const handleNotification = (message) => {
       notification: {
           title: message.title,
           body: message.body,
+          toke: message.token
       }
   }
 

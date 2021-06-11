@@ -17,6 +17,7 @@ const socketControler = require('./controllers/SocketController');
 const { createSuccesResponse, createErrorResponse } = require('./Utils/ResponseUtil');
 const tempController = require('./controllers/TempController');
 const securityVideoCamController = require('./controllers/Security/SecuityCamController/SecurityCamController')
+const notificationController = require('./NotificationController');
 
 app.use(express.json());
 io.on('connection', socketControler.socketevents);
@@ -74,6 +75,10 @@ app.post('/changeconfig',(req, res)=>{
 app.post('/apptoken', (req, res) => {
     process.env.CONNECTED_DEVICE_TOKEN = req.body.token;
     createSuccesResponse(res, 200, {});
+});
+
+app.post('/alert', (req, res) => {
+    notificationController.handleNotification(req.body);
 });
 
 server.listen(process.env.PORT || 3000, () => {
