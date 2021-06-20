@@ -93,10 +93,6 @@ app.post('/apptoken', (req, res) => {
 
 app.post('/alert', (req, res) => {
     try {
-        const db = firebase.admin.firestore().collection("Logs");
-        db.add({solicitacao: req.body})
-        .then()
-        .catch(ex => {});
         notificationController.handleNotification(req.body); 
     } catch (error) {
         createErrorResponse(res, 500, error)
