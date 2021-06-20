@@ -40,5 +40,5 @@ const getCurrentTemp = async (req, res) => {
 
 }
 
-module.exports = { addCurrentTemperature }
+module.exports = { addCurrentTemperature, getCurrentTemp }
 
