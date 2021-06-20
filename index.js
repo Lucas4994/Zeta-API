@@ -55,6 +55,13 @@ app.post('/action', (req, res) => {
     return res.send();
 });
 
+app.post('/addtemp', (req, res) => {
+    const db = firebase.admin.firestore().collection("Logs");
+    db.add({solicitacao: req.body})
+    .then()
+    .catch(ex => {});
+})
+
 app.post('/changeconfig',(req, res)=>{
     const db = firebase.admin.firestore().collection("Config");
     db.add({
