@@ -44,7 +44,7 @@ app.get('/comodos', houseController.getComodos);
 app.use('/sensores', authRequestMiddleware);
 app.get('/sensores', houseController.getSensores)
 
-app.get('temperatura',  tempController.getCurrentTemp)
+app.get('/temperatura',  tempController.getCurrentTemp)
 
 //app.use('/action', authRequestMiddleware)
 app.post('/action', (req, res) => {
