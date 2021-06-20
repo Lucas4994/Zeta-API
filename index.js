@@ -44,6 +44,8 @@ app.get('/comodos', houseController.getComodos);
 app.use('/sensores', authRequestMiddleware);
 app.get('/sensores', houseController.getSensores)
 
+app.get('temperatura', )
+
 //app.use('/action', authRequestMiddleware)
 app.post('/action', (req, res) => {
     const db = firebase.admin.firestore().collection("Logs");
@@ -57,7 +59,12 @@ app.post('/action', (req, res) => {
 
 app.post('/addtemp', (req, res) => {
     const db = firebase.admin.firestore().collection("Logs");
-    db.add({solicitacao: req.body})
+    const temp = {
+        temperatura: req.body.temp,
+        umidade: req.body.humi,
+        data: req.body.data,
+    }
+    db.add(temp)
     .then()
     .catch(ex => {});
 })
