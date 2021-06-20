@@ -31,11 +31,7 @@ const getCurrentTemp = async (req, res) => {
         });
         
 
-        const medicoesFiltered = medicoes.reduce(function(prev, current) {
-             (prev.data > current.data) ? prev : current
-        }) //
-
-        return res.json(medicoesFiltered);
+        return res.json(medicoes);
     });
 
 }
