@@ -60,7 +60,7 @@ app.post('/action', (req, res) => {
 app.post('/addtemp', (req, res) => {
     const db = firebase.admin.firestore().collection("Logs");
     const temp = {
-        temperatura: req.body.temp,
+        temperatura: req.body.temperatura,
         umidade: req.body.humi,
         data: req.body.data,
     }
