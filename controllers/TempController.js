@@ -25,8 +25,8 @@ const getCurrentTemp = async (req, res) => {
         docs.forEach( doc => {
             medicoes.push({
                 temperatura: doc.data().temperatura, 
-                comodoId: doc.data().humi,
-                excluido: doc.data().data,
+                umidade: doc.data().humi,
+                data: doc.data().data,
             });
         });
         
